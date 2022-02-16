@@ -1,0 +1,497 @@
+{
+	"info": {
+		"_postman_id": "c0bbd160-abcd-49f2-be0f-2152e6f6e0fb",
+		"name": "Homework 22",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Test for data model\", () => {",
+							"    const responseJson = pm.response.json();",
+							"    pm.expect(responseJson.id).to.eql(1);",
+							"    pm.expect(responseJson.petId).to.eql(1);",
+							"    pm.expect(responseJson.quantity).to.eql(1);",
+							"    pm.expect(responseJson.shipDate).to.eql(\"2022-02-12T11:11:11.000+0000\");",
+							"    pm.expect(responseJson.status).to.eql(\"a\")",
+							"    pm.expect(responseJson.status).to.be.a('string')",
+							"    pm.expect(responseJson.complete).to.eql(true);",
+							"    pm.response.to.have.status(200);",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": 1,\n  \"petId\": 1,\n  \"quantity\": 1,\n  \"shipDate\": \"2022-02-12T11:11:11\",\n  \"status\": \"a\",\n  \"complete\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/store/order",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"store",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Test for null data\", () => {",
+							"    const responseJson = pm.response.json();",
+							"    pm.expect(responseJson.id).to.eql(9223372036854775807);",
+							"    pm.expect(responseJson.petId).to.eql(0);",
+							"    pm.expect(responseJson.quantity).to.eql(0);",
+							"    pm.expect(responseJson.complete).to.eql(false);",
+							"    pm.response.to.have.status(400);",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": null,\n  \"petId\": null,\n  \"quantity\": null,\n  \"complete\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/store/order",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"store",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Test for '-1' data\", () => {",
+							"    const responseJson = pm.response.json();",
+							"    pm.expect(responseJson.id).to.eql(9223372036854775807);",
+							"    pm.expect(responseJson.petId).to.eql(-1);",
+							"    pm.expect(responseJson.quantity).to.eql(-1);",
+							"    pm.expect(responseJson.complete).to.eql(false);",
+							"    pm.response.to.have.status(400);",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": -1,\n  \"petId\": -1,\n  \"quantity\": -1,\n  \"complete\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/store/order",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"store",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Test for shipDate data without time\", () => {",
+							"    const responseJson = pm.response.json();",
+							"    pm.expect(responseJson.shipDate).to.eql(\"2022-02-10T00:00:00.000+0000\");",
+							"    pm.expect(responseJson.complete).to.eql(true);",
+							"    pm.response.to.have.status(200);",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"shipDate\": \"2022-02-10\",\n  \"complete\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/store/order",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"store",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Test for string\", () => {",
+							"    const responseJson = pm.response.json();",
+							"    pm.response.to.have.status(400);",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": a,\n  \"petId\": a,\n  \"quantity\": a,\n  \"complete\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/store/order",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"store",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Test for integer data in 'status'\", () => {",
+							"    const responseJson = pm.response.json();",
+							"    pm.expect(responseJson.status).to.eql(\"1\")",
+							"    pm.expect(responseJson.complete).to.eql(false);",
+							"    pm.response.to.have.status(400);",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"status\": 1,\n  \"complete\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/store/order",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"store",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "7",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Test for null data in 'status'\", () => {",
+							"    const responseJson = pm.response.json();",
+							"    pm.expect(responseJson.status).not.eql(null);",
+							"    pm.expect(responseJson.complete).to.eql(true);",
+							"    pm.response.to.have.status(200);",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"status\": null,\n  \"complete\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/store/order",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"store",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "8",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Test for null data in 'shipDate'\", () => {",
+							"    const responseJson = pm.response.json();",
+							"    pm.expect(responseJson.shipDate).not.eql(null);",
+							"    pm.response.to.have.status(200);",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \n  \"shipDate\": \"null\",\n  \"complete\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/store/order",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"store",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "9",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Test for no data\", () => {",
+							"    const responseJson = pm.response.json();",
+							"    pm.response.to.have.status(400);",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": ,\n  \"petId\": ,\n  \"quantity\": ,\n  \"complete\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/store/order",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"store",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Test for string data in 'status'\", () => {",
+							"    const responseJson = pm.response.json();",
+							"    pm.expect(responseJson.status).to.eql(\"a\")",
+							"    pm.expect(responseJson.complete).to.eql(true);",
+							"    pm.response.to.have.status(200);",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"status\": \"a\",\n  \"complete\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/store/order",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"store",
+						"order"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
